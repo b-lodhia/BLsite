@@ -15,7 +15,44 @@
       --mid: #888;
       --white: #f5f5f5;
       --card: rgba(255,255,255,0.45);
+      --nav-bg: rgba(214,214,214,0.75);
+      transition: background 0.3s, color 0.3s;
     }
+
+    body.dark {
+      --bg: #141414;
+      --black: #f0f0f0;
+      --mid: #888;
+      --white: #111111;
+      --card: rgba(255,255,255,0.05);
+      --nav-bg: rgba(20,20,20,0.85);
+    }
+
+    body.dark {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(40,40,40,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(30,30,30,0.4) 0%, transparent 60%);
+    }
+
+    /* DARK MODE TOGGLE */
+    .theme-toggle {
+      background: none;
+      border: 1px solid rgba(0,0,0,0.2);
+      cursor: pointer;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+    body.dark .theme-toggle { border-color: rgba(255,255,255,0.2); }
 
     html { scroll-behavior: smooth; }
 
@@ -27,6 +64,7 @@
       font-family: 'Josefin Sans', sans-serif;
       color: var(--black);
       min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     /* NAV */
@@ -34,7 +72,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.4rem 4rem;
-      background: rgba(214,214,214,0.75);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,0,0,0.08);
     }
@@ -358,8 +396,8 @@
   <nav>
     <a href="#" class="nav-logo">BL</a>
     <ul class="nav-links">
-      <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
   </nav>
 
   <!-- HERO -->
@@ -368,52 +406,35 @@
     <h1>Bhavesh<br/><em>Lodhia</em></h1>
     <p class="hero-sub">Welcome to my personal space — a place to learn a little about me and get in touch.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn">Get In Touch</a>
+      <a href="https://www.linkedin.com/in/b-lodhia" class="btn" target="_blank">Connect on LinkedIn</a>
+      <a href="https://www.instagram.com/blodhia" class="btn btn-outline" target="_blank">Follow on Instagram</a>
     </div>
     <div class="hero-decor">BL</div>
   </div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label">01 — Contact</p>
-    <h2 class="section-title">Get in<br/><em>touch</em></h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p>Have a question, opportunity, or just want to say hello? Fill in the form and I'll get back to you as soon as I can.</p>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/b-lodhia" class="social-link" target="_blank">LinkedIn</a>
 
-        </div>
-      </div>
-      <form class="contact-form" id="contactForm">
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="Bhavesh Lodhia" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="hello@example.com" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" rows="5" placeholder="Your message..." required></textarea>
-        </div>
-        <button type="submit" class="btn" style="align-self:flex-start; border:none;">Send Message</button>
-        <div class="form-success" id="formSuccess">✓ &nbsp; Thank you — I'll be in touch soon!</div>
-      </form>
-    </div>
-  </section>
 
   <footer>
     <p>© 2026 Bhavesh Lodhia</p>
     <p>Built with care</p>
   </footer>
 
+
+
   <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+      toggle.textContent = '☀️';
+    }
+
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      toggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
 
