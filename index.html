@@ -150,6 +150,9 @@
       margin-top: 3rem;
       opacity: 0;
       animation: fadeUp 0.9s 0.85s forwards;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .btn {
@@ -171,7 +174,7 @@
     .btn-outline {
       background: transparent;
       color: var(--black);
-      margin-left: 1rem;
+      margin-left: 0;
     }
     .btn-outline:hover { background: var(--black); color: var(--white); }
 
@@ -404,7 +407,7 @@
   <div class="hero">
     <p class="hero-label">Personal Portfolio</p>
     <h1>Bhavesh<br/><em>Lodhia</em></h1>
-    <p class="hero-sub">Welcome to my personal space — a place to learn a little about me and get in touch.</p>
+    <p class="hero-sub">Welcome to my personal space — see links below to learn more about me and get in touch.</p>
     <div class="hero-cta">
       <a href="https://www.linkedin.com/in/b-lodhia" class="btn" target="_blank">Connect on LinkedIn</a>
       <a href="https://www.instagram.com/blodhia" class="btn btn-outline" target="_blank">Follow on Instagram</a>
